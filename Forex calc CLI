@@ -1,0 +1,37 @@
+<?php 
+
+echo " FFFFF  OOO  RRRR  EEEEE  X   X     CCCC   AAAAA  L      CCCC\n";
+echo " F     O   O R   R E       X X     C      A     A L     C\n";
+echo " FFFF  O   O RRRR  EEEE     X      C      AAAAAAA L     C\n";
+echo " F     O   O R  R  E       X X     C      A     A L     C\n";
+echo " F     OOO   R   R EEEEE  X   X     CCCC   A     A LLLLL  CCCC\n";
+
+echo "\n";
+echo "O forex calc CLI faz um cálculo de lucro de 100% no forex. Além do cálculo de lucro máximo, o programa também calcula uma segunda posição que possibilitará o equilíbrio da conta, ficando 300 pontos abaixo da primeira operação.\n";
+
+$posição = readline("\nDigite a sua posição de entrada para o cálculo (exemplo: 1.03976): \n");
+$tipoDeOperação = readline("Qual o tipo da operação? (compra/venda)\n");
+
+if ($tipoDeOperação != "compra" && $tipoDeOperação != "venda") {
+    echo "Erro! A opção escolhida é inválida. Reinicie o programa e tente novamente.\n";
+} else {
+    // Verifique se a posição de entrada é válida
+    if (!is_numeric($posição)) {
+        echo "A posição informada não é válida. Tente novamente.\n";
+        exit;
+    }
+
+    // Realizando os cálculos para lucro máximo e segunda entrada
+    if ($tipoDeOperação == "compra") {
+        $lucroMax = $posição - 0.00110; // Subtrai 110 pontos (0.00110)
+        $segundaEntrada = $posição - 0.00300; // Subtrai 300 pontos (0.00300)
+    } else {
+        $lucroMax = $posição + 0.00100; // Adiciona 100 pontos (0.00100)
+        $segundaEntrada = $posição + 0.00300; // Adiciona 300 pontos (0.00300)
+    }
+
+    // Exibindo os resultados
+    echo "\nSua posição de lucro máximo é: $lucroMax \n";
+    echo "\nA segunda posição de segurança é: $segundaEntrada \n";
+}
+?>
